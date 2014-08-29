@@ -1,8 +1,11 @@
-﻿<Application x:Class="UltimatePathEditor.App"
+﻿<Application
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.PathVariable" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="UltimatePathEditor.App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+         
+    	<SampleData:PathVariable x:Key="PathVariable" d:IsDataSource="True"/>
          
     </Application.Resources>
 </Application>
