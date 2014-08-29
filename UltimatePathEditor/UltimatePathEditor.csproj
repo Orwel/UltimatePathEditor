@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +58,11 @@
     <Compile Include="SampleData\PathVariable\PathVariable.xaml.cs">
       <DependentUpon>PathVariable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewContract\IPathValueViewContract.cs" />
+    <Compile Include="ViewContract\IPathVariableViewContract.cs" />
+    <Compile Include="ViewModel\BindableBase.cs" />
+    <Compile Include="ViewModel\PathValueViewModel.cs" />
+    <Compile Include="ViewModel\PathVariableViewModel.cs" />
     <Compile Include="View\PathVariableView.xaml.cs">
       <DependentUpon>PathVariableView.xaml</DependentUpon>
     </Compile>
