@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Memento.cs" />
+    <Compile Include="Model\PathVariableManager.cs" />
     <Compile Include="SampleData\PathVariable\PathVariable.xaml.cs">
       <DependentUpon>PathVariable.xaml</DependentUpon>
     </Compile>
