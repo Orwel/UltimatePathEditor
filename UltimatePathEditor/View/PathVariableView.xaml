@@ -66,6 +66,7 @@
 			</ListBox.Resources>
 			<i:Interaction.Behaviors>
 				<Behavior:ListBoxDropBehavior x:Name="listBoxDropBehavior"/>
+				<Behavior:DragDropScrollBehavior x:Name="dragDropScrollBehavior"/>
 			</i:Interaction.Behaviors>
 		</ListBox>
 		<Button Content="Purge" Grid.Row="1" Margin="3"/>
