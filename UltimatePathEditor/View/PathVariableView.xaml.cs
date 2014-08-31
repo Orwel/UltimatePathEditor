@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UltimatePathEditor.ViewContract;
 
 namespace UltimatePathEditor.View
 {
@@ -24,5 +25,26 @@ namespace UltimatePathEditor.View
         {
             InitializeComponent();
         }
+
+        #region Drag
+        private void Ellipse_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+        	if(e.LeftButton != MouseButtonState.Pressed)
+                return;
+            var element = sender as FrameworkElement;
+            if(element == null)
+                return;
+            var pathVariable = this.DataContext as IPathVariableViewContract;
+            if (pathVariable == null)
+                return;
+            var pathValue = element.DataContext as IPathValueViewContract;
+            if(pathValue == null)
+                return;
+            pathVariable.Drag(pathValue);
+            listBoxDropBehavior.DropType = element.GetType();
+            listBoxDropBehavior.DragPathValue = pathValue;
+            DragDrop.DoDragDrop(element, pathValue, DragDropEffects.Move);
+        }
+        #endregion Drag
     }
 }

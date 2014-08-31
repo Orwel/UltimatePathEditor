@@ -99,5 +99,19 @@ namespace UltimatePathEditor.ViewModel
             _modifyState = false;
         }
         #endregion Subscribe
+
+        #region Drag and Drop
+        public bool Drag(IPathValueViewContract pathValue)
+        {
+            return this._pathValues.Contains(pathValue);
+        }
+
+        public void Drop(IPathValueViewContract pathValue, IPathValueViewContract target)
+        {
+            if (pathValue != target)
+                if (this._pathValues.Remove(pathValue))
+                    this._pathValues.Insert(this._pathValues.IndexOf(target) + 1, pathValue);
+        }
+        #endregion Drag and Drop
     }
 }
