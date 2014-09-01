@@ -16,6 +16,7 @@ namespace UltimatePathEditor.ViewModel
         private string _value;
         private bool _isDragged;
         private bool _isDragOver;
+        private bool _isValid;
         #endregion Fields
 
         #region Properties
@@ -27,13 +28,21 @@ namespace UltimatePathEditor.ViewModel
             }
             set
             {
-                this.SetProperty(ref _value, value);
+                this.SetProperty(ref this._value, value);
+                IsValid = System.IO.Directory.Exists(Value);
             }
         }
 
         public bool IsValid
         {
-            get { return System.IO.Directory.Exists(Value); }
+            get
+            {
+                return this._isValid;
+            }
+            private set
+            {
+                this.SetProperty(ref this._isValid, value);
+            }
         }
 
         public bool IsDragged
