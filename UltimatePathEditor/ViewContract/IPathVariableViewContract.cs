@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.Composition;
+using System.Windows.Input;
 
 namespace UltimatePathEditor.ViewContract
 {
@@ -18,6 +19,8 @@ namespace UltimatePathEditor.ViewContract
         /// Collection of Value in Path Environment Variable
         /// </summary>
         ObservableCollection<IPathValueViewContract> PathValues { get; }
+
+        ICommand PurgeCommand { get; }
 
         /// <summary>
         /// If return true, begin the drag interaction.

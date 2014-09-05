@@ -39,7 +39,7 @@
 							</Ellipse.Fill>
 						</Ellipse>
 						<TextBox x:Name="textBox" Text="{Binding Value}" Margin="3" Grid.Column="1"/>
-						<Button Grid.Column="2" Content="Open Folder" Margin="3"/>
+						<Button Grid.Column="2" Content="Open Folder" Margin="3" Click="Button_Click"/>
 						<Rectangle Fill="#FF64FF64" Stroke="Black" Grid.Row="1" Grid.ColumnSpan="3" Visibility="{Binding IsDragOver, Converter={StaticResource BooleanToVisibilityConverter}}" Height="5"/>
 					</Grid>
 					<DataTemplate.Triggers>
@@ -69,6 +69,6 @@
 				<Behavior:DragDropScrollBehavior x:Name="dragDropScrollBehavior"/>
 			</i:Interaction.Behaviors>
 		</ListBox>
-		<Button Content="Purge" Grid.Row="1" Margin="3"/>
+		<Button Content="Purge" Grid.Row="1" Margin="3" Command="{Binding PurgeCommand}"/>
 	</Grid>
 </UserControl>

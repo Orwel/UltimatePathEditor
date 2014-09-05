@@ -46,5 +46,21 @@ namespace UltimatePathEditor.View
             DragDrop.DoDragDrop(element, pathValue, DragDropEffects.Move);
         }
         #endregion Drag
+		
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var element = sender as FrameworkElement;
+            if (element == null)
+                return;
+            var pathValue = ((FrameworkElement)sender).DataContext as IPathValueViewContract;
+            if (pathValue == null)
+                return;
+            var opendFolder = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+            opendFolder.SelectedPath = pathValue.Value;
+            if(opendFolder.ShowDialog() == true)
+            {
+                pathValue.Value = opendFolder.SelectedPath;
+            }
+        }
     }
 }

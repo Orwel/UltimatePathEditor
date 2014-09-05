@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
@@ -69,6 +73,7 @@
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="ViewModel\PathValueViewModel.cs" />
     <Compile Include="ViewModel\PathVariableViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\PathVariableView.xaml.cs">
       <DependentUpon>PathVariableView.xaml</DependentUpon>
     </Compile>
@@ -123,7 +128,9 @@
   <ItemGroup>
     <DesignTimeOnly Include="SampleData\PathVariable\PathVariable.xsd" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Lib\Ookii.Dialogs.Wpf.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

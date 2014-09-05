@@ -6,7 +6,7 @@
 		xmlns:View="clr-namespace:UltimatePathEditor.View" 
 		mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" 
-		d:DataContext="{Binding Source={StaticResource PathVariable}}">
+		d:DataContext="{Binding Source={StaticResource PathVariable}}" SizeToContent="Width">
 	<Grid>
 		<View:PathVariableView/>
 	</Grid>

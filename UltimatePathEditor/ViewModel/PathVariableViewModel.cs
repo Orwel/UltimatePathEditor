@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UltimatePathEditor.ViewContract;
 using UltimatePathEditor.Model;
 using System.Collections.Specialized;
+using System.Windows.Input;
 
 namespace UltimatePathEditor.ViewModel
 {
@@ -18,6 +19,7 @@ namespace UltimatePathEditor.ViewModel
         #region Fields
         private ObservableCollection<IPathValueViewContract> _pathValues = new ObservableCollection<IPathValueViewContract>();
         private bool _modifyState = false;
+        private RelayCommand _purgeCommand;
         #endregion Fields
 
         #region Properties
@@ -25,10 +27,13 @@ namespace UltimatePathEditor.ViewModel
         {
             get { return this._pathValues; }
         }
+
+        public ICommand PurgeCommand { get { return this._purgeCommand; } }
         #endregion Properties
 
         public PathVariableViewModel()
         {
+            this._purgeCommand = new RelayCommand((o) => this.PurgeUnvalidPathValue());
             this._pathValues.CollectionChanged += PathValues_CollectionChanged;
             Refresh();
         }
@@ -54,6 +59,25 @@ namespace UltimatePathEditor.ViewModel
             foreach (var pathValue in _pathValues)
                 tmp += pathValue.Value + PathVariableManager.SplitCharacter;
             PathVariableManager.Instance.SetEvnironmentVariableMemento(tmp);
+        }
+
+        /// <summary>
+        /// Remove Unvalid path value
+        /// </summary>
+        private void PurgeUnvalidPathValue()
+        {
+            this._modifyState = true;
+            int previousCount = this._pathValues.Count;
+            int i = 0;
+            while(i<this._pathValues.Count)
+            {
+                if (this._pathValues[i].IsValid)
+                    i++;
+                else
+                    this._pathValues.RemoveAt(i);
+            }
+            this._modifyState = false;
+            this.SendEnvironmentVariable();
         }
 
         #region Subscribe
