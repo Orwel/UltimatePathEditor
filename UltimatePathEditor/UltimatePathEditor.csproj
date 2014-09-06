@@ -63,6 +63,8 @@
     <Compile Include="Behavior\DragDropScrollBehavior.cs" />
     <Compile Include="Behavior\ListBoxDropBehavior.cs" />
     <Compile Include="Behavior\PathValueDecorator.cs" />
+    <Compile Include="Behavior\TextBoxEventCommitBehavior.cs" />
+    <Compile Include="Model\PathEnvironmentVariableAccess.cs" />
     <Compile Include="Model\Memento.cs" />
     <Compile Include="Model\PathVariableManager.cs" />
     <Compile Include="SampleData\PathVariable\PathVariable.xaml.cs">

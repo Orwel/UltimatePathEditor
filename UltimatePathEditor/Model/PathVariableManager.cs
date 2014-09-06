@@ -22,7 +22,22 @@ namespace UltimatePathEditor.Model
                 return _instance;
             }
         }
+
+        /// <summary>
+        /// Private default constructor
+        /// </summary>
+        private PathVariableManager()
+        {}
         #endregion Singleton
+
+        #region Static Members
+        public static IPathEnvironmentVariable PathEnvironmentVariable { get; set; }
+
+        static PathVariableManager()
+        {
+            PathEnvironmentVariable = new PathEnvironmentVariableDebug(); 
+        }
+        #endregion
 
         public const char SplitCharacter = ';';
 
@@ -30,26 +45,17 @@ namespace UltimatePathEditor.Model
         /// <summary>
         /// Memento of Path Environment Variable
         /// </summary>
-        private Memento _memento = new Memento();
+        private Memento _memento = new Memento(PathEnvironmentVariable.Value);
         #endregion Fields
-
-        /// <summary>
-        /// Set the Path Environment Variable
-        /// </summary>
-        /// <param name="PathEnvironmentVariable">New value to the Path Environment Variable</param>
-        private void SetEvnironmentVariable(string PathEnvironmentVariable)
-        {
-            //Environment.SetEnvironmentVariable("Path", PathEnvironmentVariable, EnvironmentVariableTarget.Machine);
-        }
 
         /// <summary>
         /// Memorize the current value and set the Path Environment Variable
         /// </summary>
         /// <param name="PathEnvironmentVariable">New value to the Path Environment Variable</param>
-        public void SetEvnironmentVariableMemento(string PathEnvironmentVariable)
+        public void SetEvnironmentVariableMemento(string PathEnvironmentVariableValue)
         {
-            this._memento.Do(this.GetEnvironmentVariable());
-            this.SetEvnironmentVariable(PathEnvironmentVariable);
+            this._memento.Do(PathEnvironmentVariableValue);
+            this.SetEvnironmentVariable(PathEnvironmentVariableValue);
         }
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace UltimatePathEditor.Model
         /// <returns>the current Path Envrinment Variable</returns>
         public string GetEnvironmentVariable()
         {
-            return Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.Machine);
+            return this._memento.Current;
         }
 
         /// <summary>
@@ -84,5 +90,16 @@ namespace UltimatePathEditor.Model
                 this.SetEvnironmentVariable(m);
             return m;
         }
+
+        #region Private Methods
+        /// <summary>
+        /// Set the Path Environment Variable
+        /// </summary>
+        /// <param name="PathEnvironmentVariable">New value to the Path Environment Variable</param>
+        private void SetEvnironmentVariable(string PathEnvironmentVariableValue)
+        {
+            PathEnvironmentVariable.Value = PathEnvironmentVariableValue;
+        }
+        #endregion
     }
 }

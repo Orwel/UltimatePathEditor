@@ -20,6 +20,8 @@ namespace UltimatePathEditor.ViewModel
         private ObservableCollection<IPathValueViewContract> _pathValues = new ObservableCollection<IPathValueViewContract>();
         private bool _modifyState = false;
         private RelayCommand _purgeCommand;
+        private RelayCommand _undoCommand;
+        private RelayCommand _redoCommand;
         #endregion Fields
 
         #region Properties
@@ -29,11 +31,17 @@ namespace UltimatePathEditor.ViewModel
         }
 
         public ICommand PurgeCommand { get { return this._purgeCommand; } }
+
+        public ICommand UndoCommand { get { return this._undoCommand; } }
+
+        public ICommand RedoCommand { get { return this._redoCommand; } }
         #endregion Properties
 
         public PathVariableViewModel()
         {
             this._purgeCommand = new RelayCommand((o) => this.PurgeUnvalidPathValue());
+            this._undoCommand = new RelayCommand((o) => this.Undo());
+            this._redoCommand = new RelayCommand((o) => this.Redo());
             this._pathValues.CollectionChanged += PathValues_CollectionChanged;
             Refresh();
         }
@@ -43,9 +51,17 @@ namespace UltimatePathEditor.ViewModel
         /// </summary>
         public void Refresh()
         {
+            Refresh(PathVariableManager.Instance.GetEnvironmentVariable());
+        }
+
+        /// <summary>
+        /// Refresh the list of Path Value
+        /// </summary>
+        public void Refresh(string pathEnvironmentVariable)
+        {
             _modifyState = true;
             this._pathValues.Clear();
-            var pathValues = PathVariableManager.Instance.GetEnvironmentVariable().Split(PathVariableManager.SplitCharacter);
+            var pathValues = pathEnvironmentVariable.Split(PathVariableManager.SplitCharacter);
             foreach (var pathValue in pathValues)
             {
                 this._pathValues.Add(new PathValueViewModel { Value = pathValue });
@@ -53,6 +69,9 @@ namespace UltimatePathEditor.ViewModel
             _modifyState = false;
         }
 
+        /// <summary>
+        /// Send the Environment Varaible Path to DAL
+        /// </summary>
         private void SendEnvironmentVariable()
         {
             var tmp = string.Empty;
@@ -80,6 +99,26 @@ namespace UltimatePathEditor.ViewModel
             this.SendEnvironmentVariable();
         }
 
+        /// <summary>
+        /// Undo a modification of the Environment Variable Path
+        /// </summary>
+        private void Undo()
+        {
+            var result = PathVariableManager.Instance.Undo();
+            if (result != null)
+                Refresh(result);
+        }
+
+        /// <summary>
+        /// Redo a modification of the Environment Variable Path
+        /// </summary>
+        private void Redo()
+        {
+            var result = PathVariableManager.Instance.Redo();
+            if (result != null)
+                Refresh(result);
+        }
+
         #region Subscribe
         void PathValues_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -96,12 +135,11 @@ namespace UltimatePathEditor.ViewModel
 
         void PathValueViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            bool ownerModifyState = !_modifyState; //Responsabilty to modify Path Environment Variable at end of operation
-            _modifyState = true;
-
             var PathValue = sender as PathValueViewModel;
             if(PathValue != null && e.PropertyName == "Value")
             {
+                bool ownerModifyState = !_modifyState; //Responsabilty to modify Path Environment Variable at end of operation
+                _modifyState = true;
                 if (String.IsNullOrEmpty(PathValue.Value))
                 {
                     _pathValues.Remove(PathValue);
@@ -117,10 +155,12 @@ namespace UltimatePathEditor.ViewModel
                             _pathValues.Insert(baginIndex + i, new PathValueViewModel { Value = arrayPathValue[i] });
                     }
                 }
+                if (ownerModifyState)
+                {
+                    this.SendEnvironmentVariable();
+                    _modifyState = false;
+                }
             }
-            if(ownerModifyState)
-                this.SendEnvironmentVariable();
-            _modifyState = false;
         }
         #endregion Subscribe
 

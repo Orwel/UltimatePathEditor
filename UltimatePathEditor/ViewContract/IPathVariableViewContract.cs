@@ -20,7 +20,20 @@ namespace UltimatePathEditor.ViewContract
         /// </summary>
         ObservableCollection<IPathValueViewContract> PathValues { get; }
 
+        /// <summary>
+        /// Command to execute purge of the unvalid path values
+        /// </summary>
         ICommand PurgeCommand { get; }
+
+        /// <summary>
+        /// Cancel the last modification of the Environment Variable Path
+        /// </summary>
+        ICommand UndoCommand { get; }
+
+        /// <summary>
+        /// Redo the last modification of the Environment Variable Path
+        /// </summary>
+        ICommand RedoCommand { get; }
 
         /// <summary>
         /// If return true, begin the drag interaction.

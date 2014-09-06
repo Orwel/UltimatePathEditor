@@ -12,18 +12,29 @@ namespace UltimatePathEditor.Model
     class Memento
     {
         #region Fields
-        private Stack<string> UndoStack = new Stack<string>();
-        private Stack<string> RedoStack = new Stack<string>();
+        private string _current;
+        private Stack<string> _undoStack = new Stack<string>();
+        private Stack<string> _redoStack = new Stack<string>();
         #endregion Fields
+
+        #region Properties
+        public string Current { get { return this._current; } }
+        #endregion Properties
+
+        public Memento(string current)
+        {
+            this._current = current;
+        }
 
         /// <summary>
         /// Memorize the value.
         /// </summary>
         /// <param name="value"></param>
-        public void Do(string value)
+        public void Do(string current)
         {
-            this.RedoStack.Clear();
-            this.UndoStack.Push(value);
+            this._redoStack.Clear();
+            this._undoStack.Push(this._current);
+            this._current = current;
         }
 
         /// <summary>
@@ -32,11 +43,11 @@ namespace UltimatePathEditor.Model
         /// <returns>The precedent state or null if nothing is memorized</returns>
         public string Undo()
         {
-            if (RedoStack.Count != 0)
+            if (_undoStack.Count > 0)
             {
-                var m = RedoStack.Pop();
-                UndoStack.Push(m);
-                return m;
+                _redoStack.Push(this._current);
+                this._current = _undoStack.Pop();                
+                return this._current;
             }
             else
                 return null;
@@ -48,10 +59,11 @@ namespace UltimatePathEditor.Model
         /// <returns>The next state or null if nothing is memorized</returns>
         public string Redo()
         {
-            if (UndoStack.Count >= 2)
+            if (_redoStack.Count > 0)
             {
-                RedoStack.Push(UndoStack.Pop());
-                return UndoStack.Peek();
+                _undoStack.Push(this._current);
+                this._current = _redoStack.Pop();                
+                return this._current;
             }
             else
                 return null;

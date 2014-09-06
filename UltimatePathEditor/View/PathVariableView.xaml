@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:Behavior="clr-namespace:UltimatePathEditor.Behavior" x:Class="UltimatePathEditor.View.PathVariableView" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:Behavior="clr-namespace:UltimatePathEditor.Behavior" xmlns:BehaviorTextBoxCommitPressKey="clr-namespace:BehaviorTextBoxCommitPressKey" x:Class="UltimatePathEditor.View.PathVariableView" 
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600"
              >
     <UserControl.Resources>
@@ -12,6 +12,10 @@
 	<d:DataContext>
 		<Binding Source="{StaticResource PathVariable}"/>
 	</d:DataContext>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Z" Modifiers="Control" Command="{Binding UndoCommand}"/>
+        <KeyBinding Key="Y" Modifiers="Control" Command="{Binding RedoCommand}"/>
+    </UserControl.InputBindings>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition/>
@@ -38,7 +42,11 @@
 								</LinearGradientBrush>
 							</Ellipse.Fill>
 						</Ellipse>
-						<TextBox x:Name="textBox" Text="{Binding Value}" Margin="3" Grid.Column="1"/>
+						<TextBox x:Name="textBox" Text="{Binding Value}" Margin="3" Grid.Column="1">
+							<i:Interaction.Behaviors>
+								<BehaviorTextBoxCommitPressKey:TextBoxEventCommitBehavior/>
+							</i:Interaction.Behaviors>
+						</TextBox>
 						<Button Grid.Column="2" Content="Open Folder" Margin="3" Click="Button_Click"/>
 						<Rectangle Fill="#FF64FF64" Stroke="Black" Grid.Row="1" Grid.ColumnSpan="3" Visibility="{Binding IsDragOver, Converter={StaticResource BooleanToVisibilityConverter}}" Height="5"/>
 					</Grid>
