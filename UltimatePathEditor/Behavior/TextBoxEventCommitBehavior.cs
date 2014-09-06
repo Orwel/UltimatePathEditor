@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interactivity;
+using System.Windows.Threading;
 
 namespace BehaviorTextBoxCommitPressKey
 {
@@ -39,6 +40,24 @@ namespace BehaviorTextBoxCommitPressKey
             }
         }
 
+        /// <summary>
+        /// Simulate TAB keydown to send the focus on the next keyboard navigation element.
+        /// </summary>
+        public static void KeyboardNavigationFocusNext()
+        {
+            // MoveFocus takes a TraversalRequest as its argument.
+            TraversalRequest request = new TraversalRequest(FocusNavigationDirection.Next);
+
+            // Gets the element with keyboard focus.
+            UIElement elementWithFocus = Keyboard.FocusedElement as UIElement;
+
+            // Change keyboard focus.
+            if (elementWithFocus != null)
+            {
+                elementWithFocus.MoveFocus(request);
+            }
+        }
+
         #region Event Handler
         void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -59,6 +78,11 @@ namespace BehaviorTextBoxCommitPressKey
             if (textBox.Text.Contains(UltimatePathEditor.Model.PathVariableManager.SplitCharacter))
             {
                 CommitTextBox(textBox);
+                //Send the focus on the new textBox after the refresh rendered.
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() => { 
+                                                                                            KeyboardNavigationFocusNext();
+                                                                                            KeyboardNavigationFocusNext();
+                                                                                         }));
             }
         }
         #endregion Event Handler

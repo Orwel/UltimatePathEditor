@@ -149,10 +149,12 @@ namespace UltimatePathEditor.ViewModel
                     var arrayPathValue = PathValue.Value.Split(PathVariableManager.SplitCharacter);
                     if (arrayPathValue.Length > 1)
                     {
-                        PathValue.Value = arrayPathValue.First();
+                        PathValue.Value = IfNullOrEmptyReturnNew(arrayPathValue.First());
                         int baginIndex = _pathValues.IndexOf(PathValue);
                         for (int i = 1; i < arrayPathValue.Length; i++)
-                            _pathValues.Insert(baginIndex + i, new PathValueViewModel { Value = arrayPathValue[i] });
+                            _pathValues.Insert(baginIndex + i, new PathValueViewModel {
+                                Value = IfNullOrEmptyReturnNew(arrayPathValue[i])
+                            });
                     }
                 }
                 if (ownerModifyState)
@@ -163,6 +165,11 @@ namespace UltimatePathEditor.ViewModel
             }
         }
         #endregion Subscribe
+
+        private static string IfNullOrEmptyReturnNew(string value)
+        {
+            return String.IsNullOrEmpty(value) ? "New" : value;
+        }
 
         #region Drag and Drop
         public bool Drag(IPathValueViewContract pathValue)
