@@ -35,7 +35,8 @@ namespace UltimatePathEditor.Model
 
         static PathVariableManager()
         {
-            PathEnvironmentVariable = new PathEnvironmentVariableDebug(); 
+            //PathEnvironmentVariable = new PathEnvironmentVariableDebug(); 
+            PathEnvironmentVariable = new PathEnvironmentVariableAccess(); 
         }
         #endregion
 

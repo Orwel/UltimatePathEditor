@@ -8,9 +8,9 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("UltimatePathEditor")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Editor to Path Environment Variable")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Ultimate Team")]
 [assembly: AssemblyProduct("UltimatePathEditor")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
