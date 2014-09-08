@@ -59,6 +59,7 @@
 						</DataTrigger>
 						<DataTrigger Binding="{Binding IsDragged}" Value="True">
 							<Setter TargetName="rootGrid" Property="Opacity" Value="0.5" />
+							<Setter TargetName="rootGrid" Property="Background" Value="Green" />
 						</DataTrigger>
 					</DataTemplate.Triggers>
 				</DataTemplate>

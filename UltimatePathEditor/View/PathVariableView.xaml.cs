@@ -40,10 +40,14 @@ namespace UltimatePathEditor.View
             var pathValue = element.DataContext as IPathValueViewContract;
             if(pathValue == null)
                 return;
-            pathVariable.Drag(pathValue);
-            listBoxDropBehavior.DropType = element.GetType();
-            listBoxDropBehavior.DragPathValue = pathValue;
-            DragDrop.DoDragDrop(element, pathValue, DragDropEffects.Move);
+            if(pathVariable.Drag(pathValue))
+            {
+                pathValue.IsDragged = true;
+                listBoxDropBehavior.DropType = element.GetType();
+                listBoxDropBehavior.DragPathValue = pathValue;
+                DragDrop.DoDragDrop(element, pathValue, DragDropEffects.Move);
+                pathValue.IsDragged = false;
+            }
         }
         #endregion Drag
 		
