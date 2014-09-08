@@ -179,9 +179,12 @@ namespace UltimatePathEditor.ViewModel
 
         public void Drop(IPathValueViewContract pathValue, IPathValueViewContract target)
         {
+            this._modifyState = true;
             if (pathValue != target)
                 if (this._pathValues.Remove(pathValue))
                     this._pathValues.Insert(this._pathValues.IndexOf(target) + 1, pathValue);
+            this.SendEnvironmentVariable();
+            this._modifyState = false;
         }
         #endregion Drag and Drop
     }
