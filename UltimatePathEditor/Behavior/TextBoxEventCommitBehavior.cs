@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 using System.Windows.Threading;
+using UltimatePathEditor.Model;
 
 namespace UltimatePathEditor.Behavior
 {
@@ -75,7 +73,7 @@ namespace UltimatePathEditor.Behavior
             var textBox = sender as TextBox;
             if (textBox == null)
                 return;
-            if (textBox.Text.Contains(UltimatePathEditor.Model.PathVariableManager.SplitCharacter))
+            if (textBox.Text.Contains(PathVariableManager.SplitCharacter))
             {
                 CommitTextBox(textBox);
                 //Send the focus on the new textBox after the refresh rendered.

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UltimatePathEditor.Model
 {
@@ -38,29 +34,17 @@ namespace UltimatePathEditor.Model
     /// <summary>
     /// Fake access to simulate the Environment Variable Path
     /// </summary>
-    class PathEnvironmentVariableDebug : IPathEnvironmentVariable
+    internal class PathEnvironmentVariableDebug : IPathEnvironmentVariable
     {
-        string _value;
-
         public PathEnvironmentVariableDebug() : this(Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.Machine))
         {}
 
         public PathEnvironmentVariableDebug(string value)
         {
-            this._value = value;
+            this.Value = value;
         }
 
-        public string Value
-        {
-            get
-            {
-                return this._value;
-            }
-            set
-            {
-                this._value = value;
-            }
-        }
+        public string Value { get; set; }
     }
 
 }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UltimatePathEditor.ViewContract;
 using UltimatePathEditor.Model;
 using System.Collections.Specialized;
@@ -17,11 +14,11 @@ namespace UltimatePathEditor.ViewModel
     class PathVariableViewModel : BindableBase, IPathVariableViewContract
     {
         #region Fields
-        private ObservableCollection<IPathValueViewContract> _pathValues = new ObservableCollection<IPathValueViewContract>();
+        private readonly ObservableCollection<IPathValueViewContract> _pathValues = new ObservableCollection<IPathValueViewContract>();
         private bool _modifyState = false;
-        private RelayCommand _purgeCommand;
-        private RelayCommand _undoCommand;
-        private RelayCommand _redoCommand;
+        private readonly RelayCommand _purgeCommand;
+        private readonly RelayCommand _undoCommand;
+        private readonly RelayCommand _redoCommand;
         #endregion Fields
 
         #region Properties
@@ -39,9 +36,9 @@ namespace UltimatePathEditor.ViewModel
 
         public PathVariableViewModel()
         {
-            this._purgeCommand = new RelayCommand((o) => this.PurgeUnvalidPathValue());
-            this._undoCommand = new RelayCommand((o) => this.Undo());
-            this._redoCommand = new RelayCommand((o) => this.Redo());
+            this._purgeCommand = new RelayCommand(o => this.PurgeUnvalidPathValue());
+            this._undoCommand = new RelayCommand(o => this.Undo());
+            this._redoCommand = new RelayCommand(o => this.Redo());
             this._pathValues.CollectionChanged += PathValues_CollectionChanged;
             Refresh();
         }
@@ -74,10 +71,8 @@ namespace UltimatePathEditor.ViewModel
         /// </summary>
         private void SendEnvironmentVariable()
         {
-            var tmp = string.Empty;
-            foreach (var pathValue in _pathValues)
-                tmp += pathValue.Value + PathVariableManager.SplitCharacter;
-            PathVariableManager.Instance.SetEvnironmentVariableMemento(tmp);
+            var tmp = _pathValues.Aggregate(string.Empty, (current, pathValue) => current + (pathValue.Value + PathVariableManager.SplitCharacter));
+            PathVariableManager.Instance.SetEnvironmentVariableMemento(tmp);
         }
 
         /// <summary>
@@ -86,7 +81,6 @@ namespace UltimatePathEditor.ViewModel
         private void PurgeUnvalidPathValue()
         {
             this._modifyState = true;
-            int previousCount = this._pathValues.Count;
             int i = 0;
             while(i<this._pathValues.Count)
             {

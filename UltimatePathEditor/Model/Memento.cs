@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace UltimatePathEditor.Model
 {
     /// <summary>
     /// Memento memorize the different state of a value.
     /// </summary>
-    class Memento
+    internal class Memento
     {
         #region Fields
         private string _current;
-        private Stack<string> _undoStack = new Stack<string>();
-        private Stack<string> _redoStack = new Stack<string>();
+        private readonly Stack<string> _undoStack = new Stack<string>();
+        private readonly Stack<string> _redoStack = new Stack<string>();
         #endregion Fields
 
         #region Properties
@@ -29,7 +25,7 @@ namespace UltimatePathEditor.Model
         /// <summary>
         /// Memorize the value.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="current">Current value</param>
         public void Do(string current)
         {
             this._redoStack.Clear();

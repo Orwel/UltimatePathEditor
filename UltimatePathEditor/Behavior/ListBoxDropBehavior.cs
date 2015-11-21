@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
@@ -17,7 +13,7 @@ namespace UltimatePathEditor.Behavior
     class ListBoxDropBehavior : Behavior<ItemsControl>
     {
         #region Fields
-        private PathValueDecorator _decorator = new PathValueDecorator();
+        private readonly PathValueDecorator _decorator = new PathValueDecorator();
         #endregion Fields
 
         #region Properties
@@ -32,7 +28,8 @@ namespace UltimatePathEditor.Behavior
         /// <summary>
         /// The type of the dragged Path Value
         /// </summary>
-        private Type DataType { get { return DragPathValue == null ? null : DragPathValue.GetType(); } } //The type of data
+        private Type DataType => DragPathValue?.GetType();
+
         #endregion Properties
 
         protected override void OnAttached()
@@ -40,10 +37,10 @@ namespace UltimatePathEditor.Behavior
             base.OnAttached();
 
             this.AssociatedObject.AllowDrop = true;
-            this.AssociatedObject.DragEnter += new DragEventHandler(AssociatedObject_DragEnter);
-            this.AssociatedObject.DragOver += new DragEventHandler(AssociatedObject_DragOver);
-            this.AssociatedObject.DragLeave += new DragEventHandler(AssociatedObject_DragLeave);
-            this.AssociatedObject.Drop += new DragEventHandler(AssociatedObject_Drop);
+            this.AssociatedObject.DragEnter += AssociatedObject_DragEnter;
+            this.AssociatedObject.DragOver += AssociatedObject_DragOver;
+            this.AssociatedObject.DragLeave += AssociatedObject_DragLeave;
+            this.AssociatedObject.Drop += AssociatedObject_Drop;
         }
 
         void AssociatedObject_DragEnter(object sender, DragEventArgs e)

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UltimatePathEditor.ViewContract;
 
 namespace UltimatePathEditor.View
@@ -27,7 +16,7 @@ namespace UltimatePathEditor.View
         }
 
         #region Drag
-        private void Ellipse_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void Ellipse_MouseLeave(object sender, MouseEventArgs e)
         {
         	if(e.LeftButton != MouseButtonState.Pressed)
                 return;
@@ -51,7 +40,7 @@ namespace UltimatePathEditor.View
         }
         #endregion Drag
 		
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             var element = sender as FrameworkElement;
             if (element == null)
@@ -59,24 +48,10 @@ namespace UltimatePathEditor.View
             var pathValue = ((FrameworkElement)sender).DataContext as IPathValueViewContract;
             if (pathValue == null)
                 return;
-            var opendFolder = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
-            opendFolder.SelectedPath = pathValue.Value;
+            var opendFolder = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog {SelectedPath = pathValue.Value};
             if(opendFolder.ShowDialog() == true)
             {
                 pathValue.Value = opendFolder.SelectedPath;
-            }
-        }
-
-        private void TextBox_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Z && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
-            {
-                var textBox = sender as TextBox;
-                if (textBox != null)
-                {
-                    if (textBox.CanUndo && textBox.Undo())
-                        e.Handled = true;
-                }
             }
         }
     }

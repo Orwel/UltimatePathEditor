@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UltimatePathEditor.Model
+﻿namespace UltimatePathEditor.Model
 {
     /// <summary>
     /// Manager of Path Environment Variable
@@ -15,12 +9,7 @@ namespace UltimatePathEditor.Model
         private static PathVariableManager _instance;
         public static PathVariableManager Instance
         {
-            get
-            {
-                if (_instance == null)
-                    _instance = new PathVariableManager();
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new PathVariableManager()); }
         }
 
         /// <summary>
@@ -46,14 +35,14 @@ namespace UltimatePathEditor.Model
         /// <summary>
         /// Memento of Path Environment Variable
         /// </summary>
-        private Memento _memento = new Memento(PathEnvironmentVariable.Value);
+        private readonly Memento _memento = new Memento(PathEnvironmentVariable.Value);
         #endregion Fields
 
         /// <summary>
         /// Memorize the current value and set the Path Environment Variable
         /// </summary>
-        /// <param name="PathEnvironmentVariable">New value to the Path Environment Variable</param>
-        public void SetEvnironmentVariableMemento(string PathEnvironmentVariableValue)
+        /// <param name="PathEnvironmentVariableValue">New value to the Path Environment Variable</param>
+        public void SetEnvironmentVariableMemento(string PathEnvironmentVariableValue)
         {
             this._memento.Do(PathEnvironmentVariableValue);
             this.SetEvnironmentVariable(PathEnvironmentVariableValue);
@@ -96,7 +85,7 @@ namespace UltimatePathEditor.Model
         /// <summary>
         /// Set the Path Environment Variable
         /// </summary>
-        /// <param name="PathEnvironmentVariable">New value to the Path Environment Variable</param>
+        /// <param name="PathEnvironmentVariableValue">New value to the Path Environment Variable</param>
         private void SetEvnironmentVariable(string PathEnvironmentVariableValue)
         {
             PathEnvironmentVariable.Value = PathEnvironmentVariableValue;
