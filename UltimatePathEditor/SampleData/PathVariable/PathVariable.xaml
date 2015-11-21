@@ -4,16 +4,16 @@
       changes to this file can cause errors.
 -->
 <SampleData:PathVariable xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.PathVariable">
-	<SampleData:PathVariable.PathValues>
-		<SampleData:PathValuesItem Value="http://www.adatum.com/" IsValid="True" IsDragged="True" IsDragOver="False"/>
-		<SampleData:PathValuesItem Value="http://www.adventure-works.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
-		<SampleData:PathValuesItem Value="http://www.adventure-works.com/" IsValid="True" IsDragged="True" IsDragOver="True"/>
-		<SampleData:PathValuesItem Value="http://www.alpineskihouse.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
-		<SampleData:PathValuesItem Value="http://www.blueyonderairlines.com/" IsValid="True" IsDragged="True" IsDragOver="False"/>
-		<SampleData:PathValuesItem Value="http://www.cpandl.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
-		<SampleData:PathValuesItem Value="http://www.cohovineyard.com/" IsValid="True" IsDragged="True" IsDragOver="False"/>
-		<SampleData:PathValuesItem Value="http://www.cohowinery.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
-		<SampleData:PathValuesItem Value="http://www.contoso.com/" IsValid="True" IsDragged="True" IsDragOver="False"/>
-		<SampleData:PathValuesItem Value="http://www.consolidatedmessenger.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
-	</SampleData:PathVariable.PathValues>
+    <SampleData:PathVariable.PathValues>
+        <SampleData:PathValuesItem Value="http://www.adatum.com/" IsValid="True" IsDragged="True" IsDragOver="False"/>
+        <SampleData:PathValuesItem Value="http://www.adventure-works.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
+        <SampleData:PathValuesItem Value="http://www.adventure-works.com/" IsValid="True" IsDragged="True" IsDragOver="True"/>
+        <SampleData:PathValuesItem Value="http://www.alpineskihouse.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
+        <SampleData:PathValuesItem Value="http://www.blueyonderairlines.com/" IsValid="True" IsDragged="True" IsDragOver="False"/>
+        <SampleData:PathValuesItem Value="http://www.cpandl.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
+        <SampleData:PathValuesItem Value="http://www.cohovineyard.com/" IsValid="True" IsDragged="True" IsDragOver="False"/>
+        <SampleData:PathValuesItem Value="http://www.cohowinery.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
+        <SampleData:PathValuesItem Value="http://www.contoso.com/" IsValid="True" IsDragged="True" IsDragOver="False"/>
+        <SampleData:PathValuesItem Value="http://www.consolidatedmessenger.com/" IsValid="False" IsDragged="False" IsDragOver="False"/>
+    </SampleData:PathVariable.PathValues>
 </SampleData:PathVariable>

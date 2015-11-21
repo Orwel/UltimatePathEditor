@@ -9,62 +9,62 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
-	<d:DataContext>
-		<Binding Source="{StaticResource PathVariable}"/>
-	</d:DataContext>
+    <d:DataContext>
+        <Binding Source="{StaticResource PathVariable}"/>
+    </d:DataContext>
     <UserControl.InputBindings>
         <KeyBinding Key="Z" Modifiers="Control" Command="{Binding UndoCommand}"/>
         <KeyBinding Key="Y" Modifiers="Control" Command="{Binding RedoCommand}"/>
     </UserControl.InputBindings>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <ListBox Margin="5" ItemTemplate="{DynamicResource PathValueItemTemplate}" ItemsSource="{Binding PathValues}" HorizontalContentAlignment="Stretch" KeyboardNavigation.TabNavigation="Cycle">
-			<ListBox.Resources>
-				<DataTemplate x:Key="PathValueItemTemplate">
-					<Grid x:Name="rootGrid">
-						<Grid.RowDefinitions>
-							<RowDefinition/>
-							<RowDefinition Height="Auto"/>
-						</Grid.RowDefinitions>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto"/>
-							<ColumnDefinition/>
-							<ColumnDefinition Width="Auto"/>
-						</Grid.ColumnDefinitions>
-						<Ellipse Width="20" Height="20" Margin="3" MouseLeave="Ellipse_MouseLeave">
-							<Ellipse.Fill>
-								<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-									<GradientStop Color="Black" Offset="0"/>
-									<GradientStop Color="White" Offset="1"/>
-								</LinearGradientBrush>
-							</Ellipse.Fill>
-						</Ellipse>
-						<TextBox x:Name="textBox" Text="{Binding Value}" Margin="3" Grid.Column="1">
-							<i:Interaction.Behaviors>
-								<BehaviorTextBoxCommitPressKey:TextBoxEventCommitBehavior/>
-							</i:Interaction.Behaviors>
-						</TextBox>
-						<Button Grid.Column="2" Content="Open Folder" Margin="3" Click="Button_Click"/>
-						<Rectangle Fill="#FF64FF64" Stroke="Black" Grid.Row="1" Grid.ColumnSpan="3" Visibility="{Binding IsDragOver, Converter={StaticResource BooleanToVisibilityConverter}}" Height="5"/>
-					</Grid>
-					<DataTemplate.Triggers>
-						<DataTrigger Binding="{Binding IsValid}" Value="True">
-							<Setter TargetName="textBox" Property="Foreground" Value="Green" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding IsValid}" Value="False">
-							<Setter TargetName="textBox" Property="Foreground" Value="Red" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding IsDragged}" Value="True">
-							<Setter TargetName="rootGrid" Property="Opacity" Value="0.5" />
-							<Setter TargetName="rootGrid" Property="Background" Value="Green" />
-						</DataTrigger>
-					</DataTemplate.Triggers>
-				</DataTemplate>
-				<Style TargetType="{x:Type ListBoxItem}">
-					<Setter Property="Template">
+            <ListBox.Resources>
+                <DataTemplate x:Key="PathValueItemTemplate">
+                    <Grid x:Name="rootGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Width="20" Height="20" Margin="3" MouseLeave="Ellipse_MouseLeave">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="Black" Offset="0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBox x:Name="textBox" Text="{Binding Value}" Margin="3" Grid.Column="1">
+                            <i:Interaction.Behaviors>
+                                <BehaviorTextBoxCommitPressKey:TextBoxEventCommitBehavior/>
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <Button Grid.Column="2" Content="Open Folder" Margin="3" Click="Button_Click"/>
+                        <Rectangle Fill="#FF64FF64" Stroke="Black" Grid.Row="1" Grid.ColumnSpan="3" Visibility="{Binding IsDragOver, Converter={StaticResource BooleanToVisibilityConverter}}" Height="5"/>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsValid}" Value="True">
+                            <Setter TargetName="textBox" Property="Foreground" Value="Green" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsValid}" Value="False">
+                            <Setter TargetName="textBox" Property="Foreground" Value="Red" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsDragged}" Value="True">
+                            <Setter TargetName="rootGrid" Property="Opacity" Value="0.5" />
+                            <Setter TargetName="rootGrid" Property="Background" Value="Green" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                 <ContentPresenter/>
@@ -72,13 +72,13 @@
                         </Setter.Value>
                     </Setter>
                     <Setter Property="IsTabStop" Value="False"/>
-				</Style>
-			</ListBox.Resources>
-			<i:Interaction.Behaviors>
-				<Behavior:ListBoxDropBehavior x:Name="listBoxDropBehavior"/>
-				<Behavior:DragDropScrollBehavior x:Name="dragDropScrollBehavior"/>
-			</i:Interaction.Behaviors>
-		</ListBox>
-		<Button Content="Purge" Grid.Row="1" Margin="3" Command="{Binding PurgeCommand}"/>
-	</Grid>
+                </Style>
+            </ListBox.Resources>
+            <i:Interaction.Behaviors>
+                <Behavior:ListBoxDropBehavior x:Name="listBoxDropBehavior"/>
+                <Behavior:DragDropScrollBehavior x:Name="dragDropScrollBehavior"/>
+            </i:Interaction.Behaviors>
+        </ListBox>
+        <Button Content="Purge" Grid.Row="1" Margin="3" Command="{Binding PurgeCommand}"/>
+    </Grid>
 </UserControl>
