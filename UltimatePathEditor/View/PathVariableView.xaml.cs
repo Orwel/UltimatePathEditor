@@ -66,5 +66,18 @@ namespace UltimatePathEditor.View
                 pathValue.Value = opendFolder.SelectedPath;
             }
         }
+
+        private void TextBox_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Z && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                var textBox = sender as TextBox;
+                if (textBox != null)
+                {
+                    if (textBox.CanUndo && textBox.Undo())
+                        e.Handled = true;
+                }
+            }
+        }
     }
 }

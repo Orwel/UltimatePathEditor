@@ -10,12 +10,12 @@ using System.Windows.Input;
 using System.Windows.Interactivity;
 using System.Windows.Threading;
 
-namespace BehaviorTextBoxCommitPressKey
+namespace UltimatePathEditor.Behavior
 {
     /// <summary>
     /// Commit the text box when the split key or enter is pressed
     /// </summary>
-    class TextBoxEventCommitBehavior : Behavior<FrameworkElement>
+    public class TextBoxEventCommitBehavior : Behavior<FrameworkElement>
     {
         protected override void OnAttached()
         {
